@@ -60,7 +60,7 @@ public class TicTacToeGame {
     public void play(int x, int y) {
         checkCoordinate(x);
         checkCoordinate(y);
-
+        lastPlayer = getNextPlayer();
         setField(x, y);
     }
 
@@ -76,5 +76,9 @@ public class TicTacToeGame {
         if (x < 1 || 3 < x) {
             throw new RuntimeException(COORDINATE_ERR_MSG);
         }
+    }
+
+    public char getNextPlayer() {
+        return lastPlayer == 'X' ? 'O' : 'X';
     }
 }

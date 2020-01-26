@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Demo TDD. implement TicTacToeGame by first defining the spec here
@@ -83,26 +83,29 @@ public class TicTacToeGameTest {
      * R2.1: first player is X
      */
     @Test
-    public void changeMyName3() {
-
+    public void givenFirstMove_whenNextPlayer_thenX() {
+        assertThat(game.getNextPlayer(), equalTo('X'));
     }
 
     /**
      * R2.2: if lastplayer was X, nextplayer is O
      */
     @Test
-    public void changeMyName4() {
-
+    public void givenLastMoveWasX_whenNextPlayer_thenO() {
+        game.play(1, 1);
+        assertThat(game.getNextPlayer(), equalTo('O'));
     }
 
     /**
      * R2.3: if lastplayer was O, nextplayer is X
      * N.B: usefull?
      */
-    @Test
-    public void givenLastMoveWasO_WhenNextPlayer_ThenX() {
-
-    }
+//    @Test
+//    public void givenLastMoveWasO_WhenNextPlayer_ThenX() {
+//        game.play(1, 1);
+//        game.play(1, 2);
+//        assertThat(game.getNextPlayer(), equalTo('X'));
+//    }
 
 
     /*****************************************************************************************
