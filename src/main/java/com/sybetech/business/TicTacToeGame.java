@@ -41,6 +41,12 @@ public class TicTacToeGame {
      **/
     private boolean isWin(int x, int y) {
         // TODO set return value
+        if(board[0][y-1] == lastPlayer && board[1][y-1] == lastPlayer && board[2][y-1] == lastPlayer ) {
+            return true;
+        }
+        if(board[x-1][0] == lastPlayer && board[x-1][1] == lastPlayer && board[x-1][2] == lastPlayer ) {
+            return true;
+        }
         return false;
     }
 
@@ -57,11 +63,16 @@ public class TicTacToeGame {
         return false;
     }
 
-    public void play(int x, int y) {
+    public String play(int x, int y) {
         checkCoordinate(x);
         checkCoordinate(y);
         lastPlayer = getNextPlayer();
         setField(x, y);
+        if( isWin(x, y)) {
+            return String.format(RESULT_WINNER, 'X');
+        }
+        else
+            return RESULT_IN_PROGRESS;
     }
 
     private void setField(int x, int y) {
@@ -69,7 +80,7 @@ public class TicTacToeGame {
             throw new RuntimeException(FIELD_OCCUPIED_ERR_MSG);
         }
 
-        board[x-1][y-1] = 'o';
+        board[x-1][y-1] = lastPlayer;
     }
 
     private void checkCoordinate(int x) {

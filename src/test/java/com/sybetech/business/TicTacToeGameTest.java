@@ -117,15 +117,27 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenPlay_ThenInProgress() {
-
+        String result = game.play(1, 1);
+        assertThat(result, equalTo(TicTacToeGame.RESULT_IN_PROGRESS));
     }
 
     /**
      * R3.2: player who connects horizontal line first wins
+     *  |-----|-----|-----|-->x
+     *  |(1,1)|(2,1)|(3,1)|
+     *  |(1,2)|(2,2)|(3,2)|
+     *  |(1,3)|(2,3)|(3,3)|
+     *  |-----|-----|-----|
+     *  y
      */
     @Test
     public void whenPlayAndHorizontalLineFilled_ThenWinner() {
-
+        game.play(1,1); // X
+        game.play(1,2); // 0
+        game.play(2,1); // X
+        game.play(2,2); // O
+        String result = game.play(3,1); // X
+        assertThat(result, equalTo(String.format(TicTacToeGame.RESULT_WINNER, 'X')));
     }
 
     /**
@@ -133,7 +145,12 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenPlayAndVerticalLineFilled_ThenWinner() {
-
+        game.play(3,1); // X
+        game.play(1,2); // 0
+        game.play(3,2); // X
+        game.play(1,3); // O
+        String result = game.play(3,3); // X
+        assertThat(result, equalTo(String.format(TicTacToeGame.RESULT_WINNER, 'X')));
     }
 
     /**
