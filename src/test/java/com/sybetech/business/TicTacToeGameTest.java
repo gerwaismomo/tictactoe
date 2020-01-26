@@ -158,7 +158,13 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenPlayAndTopBottomDiagonalLineFilled_ThenWinner() {
-
+        game.play(1,2); // X
+        game.play(1,1); // 0
+        game.play(3,1); // X
+        game.play(2,2); // O
+        game.play(2,3); // X
+        String result = game.play(3,3); // O
+        assertThat(result, equalTo(String.format(TicTacToeGame.RESULT_WINNER, 'O')));
     }
 
     /**
@@ -166,7 +172,13 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenPlayAndBottomTopDiagonalLineFilled_ThenWinner() {
-
+        game.play(1,2); // X
+        game.play(1,3); // 0
+        game.play(3,2); // X
+        game.play(2,2); // O
+        game.play(2,3); // X
+        String result = game.play(3,1); // O
+        assertThat(result, equalTo(String.format(TicTacToeGame.RESULT_WINNER, 'O')));
     }
 
     /**
@@ -174,7 +186,16 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenAllFieldsFilled_ThenDraw() {
-
+        game.play(1,1); // X
+        game.play(2,2); // 0
+        game.play(1,3); // X
+        game.play(1,2); // O
+        game.play(3,1); // X
+        game.play(2,1); // O
+        game.play(2,3); // X
+        game.play(3,3); // O
+        String result = game.play(3,2); //
+        assertThat(result, equalTo(TicTacToeGame.RESULT_DRAW));
     }
 
 

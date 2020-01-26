@@ -47,6 +47,12 @@ public class TicTacToeGame {
         if(board[x-1][0] == lastPlayer && board[x-1][1] == lastPlayer && board[x-1][2] == lastPlayer ) {
             return true;
         }
+        if(board[0][0] == lastPlayer && board[1][1] == lastPlayer && board[2][2] == lastPlayer ) {
+            return true;
+        }
+        if(board[0][2] == lastPlayer && board[1][1] == lastPlayer && board[0][2] == lastPlayer ) {
+            return true;
+        }
         return false;
     }
 
@@ -54,13 +60,12 @@ public class TicTacToeGame {
     private boolean isDraw() {
         for (int x = 0; x < SIZE; x++) {
             for (int y = 0; y < SIZE; y++) {
-                if (board[x][y] == null) {
-                    //...
+                if (board[x][y] == UNOCCUPIED) {
+                    return false;
                 }
             }
         }
-        // TODO set return value
-        return false;
+        return true;
     }
 
     public String play(int x, int y) {
@@ -69,7 +74,10 @@ public class TicTacToeGame {
         lastPlayer = getNextPlayer();
         setField(x, y);
         if( isWin(x, y)) {
-            return String.format(RESULT_WINNER, 'X');
+            return String.format(RESULT_WINNER, lastPlayer);
+        }
+        else if(isDraw()) {
+            return RESULT_DRAW;
         }
         else
             return RESULT_IN_PROGRESS;
