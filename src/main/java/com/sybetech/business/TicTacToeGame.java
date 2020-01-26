@@ -24,7 +24,13 @@ public class TicTacToeGame {
 
     private TicTacToeGameState state;
 
-    //
+    public TicTacToeGame() {
+        this.state = new TicTacToeGameState();
+    }
+
+    public TicTacToeGame(TicTacToeGameState ticTacToeGameState) {
+        this.state = ticTacToeGameState;
+    }
 
     /**
      *
@@ -71,8 +77,12 @@ public class TicTacToeGame {
     public String play(int x, int y) {
         checkCoordinate(x);
         checkCoordinate(y);
+        TicTacToeGameMove move = new TicTacToeGameMove(1, 'X', 1, 1);
         lastPlayer = getNextPlayer();
         setField(x, y);
+        if(!state.save(move)) {
+            throw new RuntimeException();
+        }
         if( isWin(x, y)) {
             return String.format(RESULT_WINNER, lastPlayer);
         }
@@ -99,5 +109,9 @@ public class TicTacToeGame {
 
     public char getNextPlayer() {
         return lastPlayer == 'X' ? 'O' : 'X';
+    }
+
+    public TicTacToeGameState getState() {
+        return state;
     }
 }

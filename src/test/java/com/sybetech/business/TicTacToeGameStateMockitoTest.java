@@ -19,7 +19,7 @@ import static org.hamcrest.Matchers.*;
  * - spy (partial mocking): real object using real methods, unless specified otherwise
  */
 @RunWith(MockitoJUnitRunner.class) // creates required mocks and inject them in the test class
-public class TicTacToeGameStateTest {
+public class TicTacToeGameStateMockitoTest {
     /*****************************************************************************************
      * R5: use MongoDB as persistent storage for the game state.
      ****************************************************************************************/

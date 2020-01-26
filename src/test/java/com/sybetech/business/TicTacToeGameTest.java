@@ -8,6 +8,8 @@ import org.junit.rules.ExpectedException;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
+import static org.mockito.Mockito.*;
+
 /**
  * Demo TDD. implement TicTacToeGame by first defining the spec here
  * Apply Red-Green-Refactore
@@ -32,13 +34,14 @@ public class TicTacToeGameTest {
     @Before
     public final void before() {
         // mock state
-
+        state = mock(TicTacToeGameState.class);
         // mock clear
 
         // mock save
+        doReturn(true).when(state).save(org.mockito.Mockito.any(TicTacToeGameMove.class));
 
         // init game
-        game = new TicTacToeGame();
+        game = new TicTacToeGame(state);
     }
 
 
@@ -208,7 +211,7 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenInstantiated_ThenSetState() {
-
+        assertThat(game.getState(), notNullValue());
     }
 
     /**
@@ -216,7 +219,9 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenPlay_ThenSaveMoveIsInvoked() {
-
+        TicTacToeGameMove move = new TicTacToeGameMove(1, 'X', 1, 1);
+        game.play(move.getX(), move.getY());
+        verify(state, times(1)).save(move);
     }
 
     /**
@@ -224,7 +229,11 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenPlayAndSaveReturnsFalse_ThenThrowRuntimeException() {
-
+        doReturn(false).when(state).save(org.mockito.Mockito.any(TicTacToeGameMove.class));
+        //TicTacToeGameMove move = new TicTacToeGameMove(1, 'X', 1, 1);
+        //doReturn(false).when(state).save(move);
+        exception.expect(RuntimeException.class);
+        game.play(1,1);
     }
 
     /**
