@@ -13,7 +13,11 @@ public class MyHamcrestMatcher extends TypeSafeMatcher<Integer> {
     @Override
     protected boolean matchesSafely(final Integer actual) { // Matching logic
         //TODO impl me
-        return false;
+        if(expected > 5) {
+            return true;
+        } else {
+            return expected == actual;
+        }
     }
 
     @Override
@@ -23,6 +27,6 @@ public class MyHamcrestMatcher extends TypeSafeMatcher<Integer> {
 
     public static MyHamcrestMatcher myEqualTo(Integer expected) {
         // TODO impl me
-        return null;
+        return new MyHamcrestMatcher(expected);
     }
 }

@@ -5,8 +5,15 @@
     <groupId>com.sybetech</groupId>
     <artifactId>tictactoe</artifactId>
     <version>1.0</version>
-
     <packaging>war</packaging>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <failOnMissingWebXml>false</failOnMissingWebXml>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
 
     <dependencies>
 
@@ -41,14 +48,12 @@
         <!-- Testing dependencies -->
 
         <!-- JMockit - Mocking framework -->
-        <!--
         <dependency>
             <groupId>org.jmockit</groupId>
             <artifactId>jmockit</artifactId>
             <version>1.9</version>
             <scope>test</scope>
         </dependency>
-        -->
 
         <!-- Junit - Testing framework -->
         <dependency>
@@ -57,43 +62,49 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!--<dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+        </dependency>-->
+        <!--<dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <version>5.6.0</version>
+            <scope>test</scope>
+        </dependency>-->
 
         <!-- Hamcrest - Testing framework util - natively supported by junit -->
-        <!--
         <dependency>
             <groupId>org.hamcrest</groupId>
             <artifactId>hamcrest-all</artifactId>
             <version>1.3</version>
             <scope>test</scope>
         </dependency>
-        -->
 
         <!-- AssertJ. Testing framework util - fluent, assertions can be concatenated -->
-        <!--
         <dependency>
             <groupId>org.assertj</groupId>
             <artifactId>assertj-core</artifactId>
             <version>3.7.0</version>
             <scope>test</scope>
         </dependency>
-        -->
 
         <!-- Mockito - Mocking framework -->
-        <!--
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-all</artifactId>
             <version>1.10.19</version>
             <scope>test</scope>
         </dependency>
-        -->
 
          <!--TestNG - Testing framework-->
-        <!--<dependency>-->
-            <!--<groupId>org.testng</groupId>-->
-            <!--<artifactId>testng</artifactId>-->
-            <!--<version>6.11</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.11</version>
+        </dependency>
 
 
         <!-- Selenide - UI testing framework -->
@@ -146,7 +157,6 @@
         <finalName>tictactoe</finalName>
         <plugins>
             <!-- Jacoco. Test coverage measurement see http://www.eclemma.org/jacoco/trunk/doc/maven.html -->
-            <!--
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -177,7 +187,6 @@
                     </execution>
                 </executions>
             </plugin>
-            -->
 
             <!-- Jbehave - BDD framework -->
             <!-- use this plugin if u need extended configuration of Jbehave
@@ -189,10 +198,4 @@
             -->
         </plugins>
     </build>
-
-    <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <failOnMissingWebXml>false</failOnMissingWebXml>
-    </properties>
 </project>

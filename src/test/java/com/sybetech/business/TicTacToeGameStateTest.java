@@ -1,18 +1,24 @@
 package com.sybetech.business;
 
+import com.mongodb.MongoException;
 import org.jongo.MongoCollection;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.runners.MockitoJUnitRunner;
 
 import java.net.UnknownHostException;
+import static org.mockito.Mockito.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 
 /**
  * Demo for mocking framework Mockito
  * - spy (partial mocking): real object using real methods, unless specified otherwise
  */
-//@RunWith(MockitoJUnitRunner.class) // creates required mocks and inject them in the test class
-//@Ignore
+@RunWith(MockitoJUnitRunner.class) // creates required mocks and inject them in the test class
 public class TicTacToeGameStateTest {
     /*****************************************************************************************
      * R5: use MongoDB as persistent storage for the game state.
@@ -29,11 +35,11 @@ public class TicTacToeGameStateTest {
     @Before
     public void setUp() throws UnknownHostException {
         // init move
-
+        move = new TicTacToeGameMove(1, 'X', 1, 2);
         // use method spy() to partial mock class to test
-
+        state = spy(new TicTacToeGameState());
         // use method mock(Class) to mock db dependency mongoCollection (all methods are shallow).
-
+        mongoCollection = mock(MongoCollection.class);
     }
 
     /**
@@ -41,7 +47,7 @@ public class TicTacToeGameStateTest {
      */
     @Test
     public void whenInstantiated_ThenMongoHasDbName() throws Exception {
-
+        assertThat(state.getMongoCollection().getName(), equalTo(TicTacToeGameState.COLLECTION_NAME));
     }
 
     /**
@@ -49,7 +55,7 @@ public class TicTacToeGameStateTest {
      */
     @Test
     public void whenInstantiated_ThenMongoCollectionHasName() throws Exception {
-
+        assertThat(state.getMongoCollection().getDBCollection().getDB().getName(), equalTo(TicTacToeGameState.DB_NAME));
     }
 
     /**
@@ -58,7 +64,9 @@ public class TicTacToeGameStateTest {
      */
     @Test
     public void whenSave_ThenInvokeMongoCollectionSaveAndReturnTrue() throws Exception {
-
+        doReturn(mongoCollection).when(state).getMongoCollection();
+        boolean result = state.save(move);
+        assertThat(result, equalTo(true));
     }
 
     /**
@@ -67,7 +75,10 @@ public class TicTacToeGameStateTest {
      */
     @Test
     public void givenMongoException_WhenSave_ThenReturnFalse() {
-
+        doReturn(mongoCollection).when(state).getMongoCollection();
+        doThrow(new MongoException("saving failed.")).when(mongoCollection).save(move);
+        boolean result = state.save(move);
+        assertThat(result, equalTo(false));
     }
 
     /**
@@ -75,7 +86,10 @@ public class TicTacToeGameStateTest {
      */
     @Test
     public void whenClear_ThenInvokeMongoCollectionDrop() {
-
+        doReturn(mongoCollection).when(state).getMongoCollection();
+        boolean result = state.clear();
+        assertThat(result, equalTo(true));
+        verify(mongoCollection, times(1)).drop();
     }
 
     /**
@@ -85,6 +99,9 @@ public class TicTacToeGameStateTest {
      */
     @Test
     public void givenMongoException_WhenClear_ThenReturnFalse() {
-
+        doReturn(mongoCollection).when(state).getMongoCollection();
+        doThrow(new MongoException("drop failed.")).when(mongoCollection).drop();
+        boolean result = state.clear();
+        assertThat(result, equalTo(false));
     }
 }

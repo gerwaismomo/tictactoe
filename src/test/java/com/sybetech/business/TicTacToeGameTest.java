@@ -5,9 +5,19 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import org.hamcrest.Matchers.*;
+
 /**
  * Demo TDD. implement TicTacToeGame by first defining the spec here
  * Apply Red-Green-Refactore
+ *
+ |-----|-----|-----|-->y
+ |(1,1)|(2,1)|(3,1)|
+ |(1,2)|(2,2)|(3,2)|
+ |(1,3)|(2,3)|(3,3)|
+ |-----|-----|-----|
+ x
  */
 public class TicTacToeGameTest {
 
@@ -28,6 +38,7 @@ public class TicTacToeGameTest {
         // mock save
 
         // init game
+        game = new TicTacToeGame();
     }
 
 
@@ -38,17 +49,19 @@ public class TicTacToeGameTest {
     /**
      * R1.1: throw RuntimeException if x not valid
      */
-    @Test
-    public void changeMyName1() {
-
+    @Test(expected = RuntimeException.class)
+    public void whenXoutsideBoard_thenThrowRuntimeException() {
+        game.play(0, 2);
     }
 
     /**
      * R1.2: throw RuntimeException if y not valid
      */
     @Test
-    public void changeMyName2() {
-
+    public void whenYoutsideBoard_thenThrowRuntimeException() {
+        exception.expect(RuntimeException.class);
+        exception.expectMessage(TicTacToeGame.COORDINATE_ERR_MSG);
+        game.play(1, 4);
     }
 
     /**
@@ -56,7 +69,10 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenOccupied_ThenThrowRuntimeException() {
-
+        exception.expect(RuntimeException.class);
+        exception.expectMessage(TicTacToeGame.FIELD_OCCUPIED_ERR_MSG);
+        game.play(1,1);
+        game.play(1,1);
     }
 
     /*****************************************************************************************

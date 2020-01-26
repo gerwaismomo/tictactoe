@@ -4,6 +4,8 @@ import com.sybetech.business.TicTacToeGameMove;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Demo for testing framework util Hamcrest
@@ -34,30 +36,35 @@ public class TicTacToeGameMoveHamcrestTest {
     // check id is set after instantiation
     @Test
     public void whenInstantiated_ThenIdIsSet() {
-
+        assertThat(move.getId(), is(equalTo(id)));
+        assertThat(move.getId(), is(id));
+        assertThat(move.getId(), equalTo(id));
+        assertThat(move.getId(), (not(10)));
     }
 
     // check x is set after instantiation. use junit assertThat
     @Test
     public void whenInstantiated_ThenXIsSet() {
-
+        org.junit.Assert.assertEquals(move.getX(), equalTo(x));
     }
 
     // check y is set after instantiation. use MyHamcrestMatcher.myEqualTo
     @Test
     public void whenInstantiated_ThenYIsSet() {
-
+        assertThat(move.getY(), MyHamcrestMatcher.myEqualTo(1));
     }
 
     // check player is set after instantiation
     @Test
     public void whenInstantiated_ThenPlayerIsSet() {
-
+        org.junit.Assert.assertEquals(move.getPlayer(), equalTo(player));
     }
 
     // check allowedChars are O and X after instantiation
     @Test
     public void whenInstantiated_ThenAllowedCharsAreOandX() {
-
+        assertThat(move.getAllowedChars(), contains('X', 'O'));
+        assertThat(move.getAllowedChars(), containsInAnyOrder('O', 'X'));
+        assertThat(move.getAllowedChars(), hasSize(2));
     }
 }

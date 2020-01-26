@@ -56,4 +56,25 @@ public class TicTacToeGame {
         // TODO set return value
         return false;
     }
+
+    public void play(int x, int y) {
+        checkCoordinate(x);
+        checkCoordinate(y);
+
+        setField(x, y);
+    }
+
+    private void setField(int x, int y) {
+        if(board[x-1][y-1] != UNOCCUPIED ) {
+            throw new RuntimeException(FIELD_OCCUPIED_ERR_MSG);
+        }
+
+        board[x-1][y-1] = 'o';
+    }
+
+    private void checkCoordinate(int x) {
+        if (x < 1 || 3 < x) {
+            throw new RuntimeException(COORDINATE_ERR_MSG);
+        }
+    }
 }
