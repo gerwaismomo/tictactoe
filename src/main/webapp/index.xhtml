@@ -13,11 +13,21 @@
         Click on the fields to play
         <h:panelGrid id="btnsParent"  columns="3" style="margin-bottom:10px" cellpadding="5">
             <h:commandButton id="btn1_1" update="growl" actionListener="#{ticTacToeGameUiController.play}" style="width: 40px; height: 40px"/>
+            <h:commandButton id="btn2_1" update="growl" actionListener="#{ticTacToeGameUiController.play}" style="width: 40px; height: 40px"/>
+            <h:commandButton id="btn3_1" update="growl" actionListener="#{ticTacToeGameUiController.play}" style="width: 40px; height: 40px"/>
+
+            <h:commandButton id="btn1_2" update="growl" actionListener="#{ticTacToeGameUiController.play}" style="width: 40px; height: 40px"/>
+            <h:commandButton id="btn2_2" update="growl" actionListener="#{ticTacToeGameUiController.play}" style="width: 40px; height: 40px"/>
+            <h:commandButton id="btn3_2" update="growl" actionListener="#{ticTacToeGameUiController.play}" style="width: 40px; height: 40px"/>
+
+            <h:commandButton id="btn1_3" update="growl" actionListener="#{ticTacToeGameUiController.play}" style="width: 40px; height: 40px"/>
+            <h:commandButton id="btn2_3" update="growl" actionListener="#{ticTacToeGameUiController.play}" style="width: 40px; height: 40px"/>
+            <h:commandButton id="btn3_3" update="growl" actionListener="#{ticTacToeGameUiController.play}" style="width: 40px; height: 40px"/>
             <!-- Add the other components -->
         </h:panelGrid>
 
         <!-- Add button action -->
-        <h:commandButton value="Reset game session"/>
+        <h:commandButton value="Reset game session" actionListener="#{ticTacToeGameUiController.reset}"/>
 
     </h:form>
 </h:body>

@@ -36,6 +36,10 @@ public class TicTacToeGame {
         }
     }
 
+    public char getLastPlayer() {
+        return lastPlayer;
+    }
+
     /**
      *
         1     2     3
