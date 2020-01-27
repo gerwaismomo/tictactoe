@@ -1,6 +1,13 @@
+
+
+
+
 package com.sybetech.business;
 
 import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertThat;
 
 /**
  * Demo for integration test
@@ -15,8 +22,20 @@ public class TicTacToeGameIntTest {
     /**
      * 1: interface to MongoDb (drop and save) should work
      */
-    //@Test
+    @Test
     public void givenMongoDbIsUp_WhenPlay_ThenDropAndSaveWork() {
+        TicTacToeGame game = new TicTacToeGame();
+        TicTacToeGameMove move1 = new TicTacToeGameMove(1, 'X', 1, 1);
+        game.play(move1.getX(), move1.getY());
 
+        TicTacToeGameMove move2 = new TicTacToeGameMove(2, 'O', 1, 2);
+        game.play(move2.getX(), move2.getY());
+
+        TicTacToeGameState state = new TicTacToeGameState();
+        TicTacToeGameMove persistedMove1 = state.findById(move1.getId());
+        TicTacToeGameMove persistedMove2 = state.findById(move2.getId());
+
+        assertThat(persistedMove1, equalTo(move1));
+        assertThat(persistedMove2, equalTo(move2));
     }
 }
