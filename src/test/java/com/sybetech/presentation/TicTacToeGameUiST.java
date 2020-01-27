@@ -1,6 +1,7 @@
 package com.sybetech.presentation;
 
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.Const;
+import com.sybetech.business.TicTacToeGame;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -16,7 +17,7 @@ import static org.junit.Assert.assertThat;
  * System Test.
  * Works only after deployment
  */
-@Ignore
+//@Ignore
 public class TicTacToeGameUiST {
 
 	private WebDriver driver;
@@ -30,11 +31,15 @@ public class TicTacToeGameUiST {
 	public void whenPlayAndWholeHorizontalLineFilled_ThenWinner() throws Exception {
 		driver.get(Constants.APP_URL);
 		assertThat(driver.getTitle(), equalTo(Constants.APP_TITLE));
-		assertThat(play(1,1), equalTo("X"));
-//		game.play(1,2); // 0
-//		game.play(3,2); // X
-//		game.play(1,3); // O
 
+		assertThat(play(1,1), equalTo("X"));
+		assertThat(play(1,2), equalTo("O"));
+		assertThat(play(2,1), equalTo("X"));
+		assertThat(play(2,3), equalTo("O"));
+		assertThat(play(3,1), equalTo("X"));
+
+		WebElement result = driver.findElement(By.name("f:result"));
+		assertThat(result.getAttribute("value"), equalTo(String.format(TicTacToeGame.RESULT_WINNER, "X")));
 	}
 
 	private String play(int x, int y) {
@@ -44,4 +49,5 @@ public class TicTacToeGameUiST {
 		return btn.getAttribute("value");
 	}
 
+	// TODO test vertical and 2 diagonals and draw
 }

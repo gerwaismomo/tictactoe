@@ -5,7 +5,7 @@ public class TicTacToeGame {
 
     public static final String RESULT_IN_PROGRESS = "In progress";
     static final String RESULT_DRAW = "Draw";
-    static final String RESULT_WINNER = "Winner is %s";
+    public static final String RESULT_WINNER = "Winner is %s";
 
     public static final String COORDINATE_ERR_MSG = "Coordinate must be between 1 and 3";
     public static final String FIELD_OCCUPIED_ERR_MSG = "Field is already occupied!";

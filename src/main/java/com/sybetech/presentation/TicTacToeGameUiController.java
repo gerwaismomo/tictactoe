@@ -23,11 +23,21 @@ public class TicTacToeGameUiController
 	 ****************************************************************************************/
 
 	private TicTacToeGame game;
+	private String gameResult;
 
 	@PostConstruct
 	private void init() {
 		// TODO init game
 		game = new TicTacToeGame();
+		gameResult = "";
+	}
+
+	public String getGameResult() {
+		return gameResult;
+	}
+
+	public void setGameResult(String gameResult) {
+		this.gameResult = gameResult;
 	}
 
 	public void play(ActionEvent event) {
@@ -35,11 +45,11 @@ public class TicTacToeGameUiController
 			String buttonId = event.getComponent().getId().replace("btn", "");
 			String[] xy = buttonId.split("_");
 			// TODO play and get last player
-			String moveResult = game.play(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]));
+			gameResult = game.play(Integer.parseInt(xy[0]), Integer.parseInt(xy[1]));
 			String lastPlayer = ""+ game.getLastPlayer();
 			setButtonValue(event.getComponent(), lastPlayer, true);
-			if (!moveResult.equals(TicTacToeGame.RESULT_IN_PROGRESS)) {
-				addMessage(moveResult);
+			if (!gameResult.equals(TicTacToeGame.RESULT_IN_PROGRESS)) {
+				addMessage(gameResult);
 				gameover();
 			}
 		} catch (Exception e) {
