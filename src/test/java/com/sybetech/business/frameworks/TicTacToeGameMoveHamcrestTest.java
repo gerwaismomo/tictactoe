@@ -45,7 +45,7 @@ public class TicTacToeGameMoveHamcrestTest {
     // check x is set after instantiation. use junit assertThat
     @Test
     public void whenInstantiated_ThenXIsSet() {
-        org.junit.Assert.assertEquals(move.getX(), equalTo(x));
+        assertThat(move.getX(), equalTo(x));
     }
 
     // check y is set after instantiation. use MyHamcrestMatcher.myEqualTo
@@ -57,7 +57,7 @@ public class TicTacToeGameMoveHamcrestTest {
     // check player is set after instantiation
     @Test
     public void whenInstantiated_ThenPlayerIsSet() {
-        org.junit.Assert.assertEquals(move.getPlayer(), equalTo(player));
+        assertThat(move.getPlayer(), is(player));
     }
 
     // check allowedChars are O and X after instantiation

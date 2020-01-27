@@ -36,6 +36,7 @@ public class TicTacToeGameTest {
         // mock state
         state = mock(TicTacToeGameState.class);
         // mock clear
+        doReturn(true).when(state).clear();
 
         // mock save
         doReturn(true).when(state).save(org.mockito.Mockito.any(TicTacToeGameMove.class));
@@ -241,7 +242,13 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenPlayMultipleTimes_ThenTurnIncreased() {
+        TicTacToeGameMove move1 = new TicTacToeGameMove(1, 'X', 1, 1);
+        game.play(move1.getX(), move1.getY());
+        verify(state, times(1)).save(move1);
 
+        TicTacToeGameMove move2 = new TicTacToeGameMove(2, 'O', 2, 1);
+        game.play(move2.getX(), move2.getY());
+        verify(state, times(1)).save(move2);
     }
 
     /**
@@ -249,7 +256,7 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenInstantiated_ThenStateClearInvoked() {
-
+        verify(state, times(1)).clear();
     }
 
     /**
@@ -257,7 +264,10 @@ public class TicTacToeGameTest {
      */
     @Test
     public void whenInstantiatedAndClearReturnsFalse_ThenThrowRuntimeException() {
-
+        doReturn(false).when(state).clear();
+        exception.expect(RuntimeException.class);
+        new TicTacToeGame(state);
+        //game.play(1,1);
     }
 
     /*****************************************************************************************

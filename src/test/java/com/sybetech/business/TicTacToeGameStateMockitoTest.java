@@ -104,4 +104,6 @@ public class TicTacToeGameStateMockitoTest {
         boolean result = state.clear();
         assertThat(result, equalTo(false));
     }
+
+    
 }

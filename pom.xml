@@ -100,11 +100,11 @@
         </dependency>
 
          <!--TestNG - Testing framework-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.11</version>
-        </dependency>
+        </dependency>-->
 
 
         <!-- Selenide - UI testing framework -->

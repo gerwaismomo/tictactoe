@@ -22,14 +22,18 @@ public class TicTacToeGame {
     private int move = 0;
     private static final int SIZE = 3;
 
+    private int counter = 0;
     private TicTacToeGameState state;
 
     public TicTacToeGame() {
-        this.state = new TicTacToeGameState();
+        this(new TicTacToeGameState());
     }
 
     public TicTacToeGame(TicTacToeGameState ticTacToeGameState) {
         this.state = ticTacToeGameState;
+        if( !this.state.clear()) {
+            throw  new RuntimeException(DROP_DB_ERR_MSG);
+        }
     }
 
     /**
@@ -77,11 +81,11 @@ public class TicTacToeGame {
     public String play(int x, int y) {
         checkCoordinate(x);
         checkCoordinate(y);
-        TicTacToeGameMove move = new TicTacToeGameMove(1, 'X', 1, 1);
         lastPlayer = getNextPlayer();
+        TicTacToeGameMove move = new TicTacToeGameMove(++counter, lastPlayer, x, y);
         setField(x, y);
         if(!state.save(move)) {
-            throw new RuntimeException();
+            throw new RuntimeException(SAVE_STATE_ERR_MSG);
         }
         if( isWin(x, y)) {
             return String.format(RESULT_WINNER, lastPlayer);
