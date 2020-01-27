@@ -76,6 +76,7 @@ public class TicTacToeGameUiController
 			cb.setValue(val);
 		cb.setDisabled(disable);
 	}
+	//		game.play(3,1); // X
 
 	private void addMessage(String summary) {
 		FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, summary, null);
