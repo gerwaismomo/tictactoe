@@ -1,6 +1,7 @@
 package com.sybetech.business;
 
 import com.mongodb.MongoException;
+import org.jongo.FindOne;
 import org.jongo.MongoCollection;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -105,5 +106,17 @@ public class TicTacToeGameStateMockitoTest {
         assertThat(result, equalTo(false));
     }
 
-    
+    @Test
+    public void whenFindById_ThenInvokeMongoCollectionFindOneAndReturnMove() {
+        // mock (check the behaviour)
+        doReturn(mongoCollection).when(state).getMongoCollection();
+        // stub (change state/result values)
+        FindOne findOne = mock(FindOne.class);
+        System.out.println("findOen "+ findOne);
+        doReturn(findOne).when(mongoCollection).findOne("{_id:#}", move.getId());
+        doReturn(move).when(findOne).as(TicTacToeGameMove.class);
+
+        TicTacToeGameMove result = state.findById(move.getId());
+        assertThat(result, equalTo(move));
+    }
 }

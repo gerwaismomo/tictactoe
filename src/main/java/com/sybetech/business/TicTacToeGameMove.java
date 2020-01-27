@@ -1,15 +1,20 @@
 package com.sybetech.business;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.jongo.marshall.jackson.oid.MongoId;
+
 import java.util.Arrays;
 import java.util.List;
 
 public class TicTacToeGameMove {
 
-//	@MongoId
+	@MongoId
     private int id;
     private char player;
     private int x;
     private int y;
+    @JsonIgnore
     private List<Character> allowedChars;
 
     private TicTacToeGameMove() {

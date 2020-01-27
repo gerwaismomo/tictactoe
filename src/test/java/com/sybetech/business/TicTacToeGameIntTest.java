@@ -1,5 +1,7 @@
 package com.sybetech.business;
 
+import org.junit.Test;
+
 /**
  * Demo for integration test
  * - tests should run fast. Therefore test only what is not yet unit tested

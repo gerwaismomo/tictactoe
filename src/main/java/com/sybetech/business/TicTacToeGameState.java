@@ -1,6 +1,7 @@
 package com.sybetech.business;
 
 import com.mongodb.MongoClient;
+import org.jongo.FindOne;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 
@@ -34,8 +35,9 @@ public class TicTacToeGameState {
     }
 
     public TicTacToeGameMove findById(int id) {
-        mongoCollection.findOne("{_id:#}", id).as(TicTacToeGameMove.class);
-        return null;
+        FindOne dbEntry = getMongoCollection().findOne("{_id:#}", id);
+        TicTacToeGameMove move = dbEntry.as(TicTacToeGameMove.class);
+        return move;
     }
 
     public MongoCollection getMongoCollection() {
