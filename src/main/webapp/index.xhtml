@@ -26,10 +26,11 @@
             <!-- Add the other components -->
         </h:panelGrid>
 
+        <!-- Add button action -->
+        <h:commandButton id="resett" value="Reset game session" actionListener="#{ticTacToeGameUiController.reset}"/>
         <h:inputText id="result" value="#{ticTacToeGameUiController.gameResult}" />
 
-        <!-- Add button action -->
-        <h:commandButton value="Reset game session" actionListener="#{ticTacToeGameUiController.reset}"/>
+
 
     </h:form>
 </h:body>
