@@ -55,19 +55,19 @@ public class TicTacToeGame {
      **/
     private boolean isWin(int x, int y) {
         // TODO set return value
-        if(board[0][y-1] == lastPlayer && board[1][y-1] == lastPlayer && board[2][y-1] == lastPlayer ) {
-            return true;
+        int prod1 = 1, prod2 = 1, prod3 = 1, prod4 = 1;
+        for(int i=0; i<3; i++) {
+            prod1 *= (int) board[i][y-1];
+            prod2 *= (int) board[x-1][i];
+            if( x == y ) {
+                prod3 *= (int) board[i][i];
+                prod4 *= (int) board[2-i][i];
+            }
         }
-        if(board[x-1][0] == lastPlayer && board[x-1][1] == lastPlayer && board[x-1][2] == lastPlayer ) {
-            return true;
-        }
-        if(board[0][0] == lastPlayer && board[1][1] == lastPlayer && board[2][2] == lastPlayer ) {
-            return true;
-        }
-        if(board[0][2] == lastPlayer && board[1][1] == lastPlayer && board[2][0] == lastPlayer ) {
-            return true;
-        }
-        return false;
+        return prod1 == 264 || prod1 == 237
+            || prod2 == 264|| prod2 == 237
+            || prod3 == 264 || prod3 == 237
+            || prod4 == 264 || prod4 == 237;
     }
 
     // Hint: if one cell is UNOCCUPIED false, else true
