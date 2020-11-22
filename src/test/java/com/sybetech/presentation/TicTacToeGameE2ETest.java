@@ -1,6 +1,6 @@
 package com.sybetech.presentation;
 
-import com.sybetech.business.TicTacToeGame;
+/*import com.sybetech.business.TicTacToeGame;
 import com.sybetech.business.TicTacToeGameMove;
 import com.sybetech.business.TicTacToeGameState;
 import org.junit.Before;
@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertThat;*/
 
 /**
  * System Test.
@@ -20,7 +20,7 @@ import static org.junit.Assert.assertThat;
 //@Ignore
 public class TicTacToeGameE2ETest {
 
-	private WebDriver driver;
+	/*private WebDriver driver;
 
 	@Before
 	public void setUp() {
@@ -58,7 +58,7 @@ public class TicTacToeGameE2ETest {
 		btn.submit(); // click
 		btn = driver.findElement(By.name(String.format("f:btn%s_%s", x, y)));
 		return btn.getAttribute("value");
-	}
+	}*/
 
 	// TODO test vertical and 2 diagonals and draw
 }
