@@ -55,17 +55,15 @@ public class TicTacToeGame {
      **/
     private boolean isWin(int x, int y) {
         // TODO set return value
-        int prod1 = 1, prod2 = 1, prod3 = 1, prod4 = 1;
+        int prod1 = 0, prod2 = 0, prod3 = 0, prod4 = 0;
         for(int i=0; i<3; i++) {
-            prod1 *= (int) board[i][y-1];
-            prod2 *= (int) board[x-1][i];
-            if( x == y ) {
-                prod3 *= (int) board[i][i];
-                prod4 *= (int) board[2-i][i];
-            }
+            prod1 += (int) board[i][y-1];
+            prod2 += (int) board[x-1][i];
+            prod3 += (int) board[i][i];
+            prod4 += (int) board[2-i][i];
         }
         return prod1 == 264 || prod1 == 237
-            || prod2 == 264|| prod2 == 237
+            || prod2 == 264 || prod2 == 237
             || prod3 == 264 || prod3 == 237
             || prod4 == 264 || prod4 == 237;
     }

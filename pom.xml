@@ -123,14 +123,12 @@
         </dependency>
 
         <!-- JBehave - BDD framework -->
-        <!--
         <dependency>
             <groupId>org.jbehave</groupId>
             <artifactId>jbehave-core</artifactId>
             <version>3.9.5</version>
             <scope>test</scope>
         </dependency>
-        -->
 
         <!-- Cucumber - BDD framework -->
         <!-- N.B. only Cucumber 1.2.4 works with selenium 2.53.0 -->
