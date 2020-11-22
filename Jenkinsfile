@@ -5,19 +5,17 @@ pipeline {
         stage('Pull sources') {
             steps {
                 echo 'Pulling scm..'
-				git branch: 'my_specific_branch',
+				git branch: 'demo_bbl',
 					credentialsId: 'github_gerwais',
 					url: 'https://github.com/gerwaismomo/tictactoe.git'
 
 				sh "ls -lat"
             }
         }
-        stage('Build') {
+        stage('Compile') {
             steps {
                 echo 'Building..'
-				git branch: 'my_specific_branch',
-                credentialsId: 'my_cred_id',
-                url: 'ssh://git@test.com/proj/test_proj.git'
+				sh "mvn clean validate compile"
 
             sh "ls -lat"
             }
@@ -25,6 +23,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing..'
+				sh "mvn clean test"
             }
         }
         stage('Code quality') {
