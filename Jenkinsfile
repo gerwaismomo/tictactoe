@@ -8,7 +8,7 @@ pipeline {
 				git branch: 'demo_bbl',
 					credentialsId: 'github_gerwais',
 					url: 'https://github.com/gerwaismomo/tictactoe.git'
-
+                
 				withMaven (maven: 'maven-tool')  {
 					sh "mvn clean validate"
 				}
@@ -47,13 +47,43 @@ pipeline {
         }
         stage('Release') {
             steps {
-                echo 'Releasing....'
+                echo 'Releasing...'
+                
+                withMaven (maven: 'maven-tool') {
+					sh "mvn package"
+				}
+                
+                nexusArtifactUploader(
+                            nexusVersion: "nexus3",
+                            protocol: "http",
+                            nexusUrl: "147.75.101.5:8081",
+                            groupId: "fr.creative.bbl",
+                            version: "v24.11.2020",
+                            repository: "devops-bbl",
+                            credentialsId: "nexus-credentials",
+                            artifacts: [
+                                // Artifact generated such as .jar, .ear and .war files.
+                                [artifactId: "devops-bbl",
+                                classifier: '',
+                                file: "./target/tictactoe.war",
+                                type: "war"]
+                            ]
+                );
             }
         }
-        stage('Notify') {
-            steps {
-                echo 'Mailing....'
+    }
+	post {
+        failure {
+            emailext to: "gerwaismomo@gmail.com",
+					subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed", 
+                    body: '''${SCRIPT, template="jenkins-generic-matrix-email-html.template"}''', 
+                    mimeType: 'text/html'
             }
-        }
+        success {
+			emailext to: "gerwaismomo@gmail.com",
+                subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
+				body: '''${SCRIPT, template="groovy-html.template"}''',  
+                mimeType: 'text/html'
+		}      
     }
 }
