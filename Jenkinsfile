@@ -9,26 +9,31 @@ pipeline {
 					credentialsId: 'github_gerwais',
 					url: 'https://github.com/gerwaismomo/tictactoe.git'
 
-				sh "ls -lat"
+				withMaven (maven: 'maven-tool')  {
+					sh "mvn clean validate"
+				}
             }
         }
         stage('Compile') {
             steps {
-                echo 'Building..'
-				sh "mvn clean validate compile"
-
-            sh "ls -lat"
+                echo 'Compiling..'
+				
+				withMaven (maven: 'maven-tool') {
+					sh "mvn clean validate compile"
+				}
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
-				sh "mvn clean test"
+				withMaven (maven: 'maven-tool') {
+					sh "mvn test"
+				}
             }
         }
         stage('Code quality') {
             steps {
-                echo 'Testing..'
+                echo 'Push to SonarQube..'
             }
         }
         stage('Release') {
