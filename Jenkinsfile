@@ -74,13 +74,13 @@ pipeline {
     }
 	post {
         failure {
-            emailext to: "gerwaismomo@gmail.com",
+            emailext to: "n.trincal@groupe-creative.fr",
 					subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Failed", 
                     body: '''${SCRIPT, template="jenkins-generic-matrix-email-html.template"}''', 
                     mimeType: 'text/html'
             }
         success {
-			emailext to: "gerwaismomo@gmail.com",
+			emailext to: "a.cassano@groupe-creative.fr",
                 subject: "${env.JOB_NAME} - Build # ${env.BUILD_NUMBER} - Successful",
 				body: '''${SCRIPT, template="groovy-html.template"}''',  
                 mimeType: 'text/html'
